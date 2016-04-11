@@ -1,12 +1,14 @@
 # Import Stock and Option Trades into TurboTax for U.S. Tax Filing
 
-Brokerage companies report information on stock and option trades on [Form
-1099-B](https://www.irs.gov/pub/irs-pdf/i1099b.pdf) for U.S. tax
-filing. Copying data by hand for dozens of stock or option trades is tedious
-and error-prone. TurboTax (and maybe other tax preparation software) supports
-the TXF format for importing data from Form 1099-B.  Unfortunately, neither
-Charles Schwab nor TD Ameritrade provide a TXF file.  They only provide a PDF
-file containing Form 1099-B.
+Brokerage companies report information on stock and option trades on
+[Form 1099-B](https://www.irs.gov/pub/irs-pdf/i1099b.pdf) for U.S. tax
+filing. Copying data by hand for dozens of stock or option trades is
+tedious and error-prone. TurboTax (and maybe other tax preparation
+software) supports the [TXF
+format](https://turbotax.intuit.com/txf/TXF042.jsp) for importing data
+from Form 1099-B.  Unfortunately, neither Charles Schwab nor TD
+Ameritrade provide a TXF file.  They only provide a PDF file
+containing Form 1099-B.
 
 ## Convert the PDF File to CSV
 
