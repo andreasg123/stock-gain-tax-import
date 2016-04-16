@@ -13,8 +13,8 @@ with open(sys.argv[1]) as f:
     content = [x.strip('\n') for x in f.readlines()]
 
 # Start positions of the columns in the text file.
-columns1 = (0, 70, 79, 113, 132, 152, 172)
-columns2 = (0, 70)
+columns1 = (0, 70, 79, 113, 130, 151, 172)
+columns2 = (0, 70, 130)
 
 def splitLine(line, columns):
     ncol = len(columns)
@@ -79,4 +79,14 @@ for r in records:
     match2 = re.search(pat2, r[8])
     if match2:
         r[8] = r[8][:match2.start(1)] + r[8][match2.end(1):]
-    print '%s,%g,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s' % (r[8], count, r[2], r[9], r[3], r[4], r[5], r[6], r[7], r[10], r[1], r[0])
+    # From the instructions of Charles Schwab Form 1099-B:
+    # Box 1f. Shows W for wash sale, C for collectibles, or D for market discount.
+    # Box 1g. Shows the amount of nondeductible loss in a wash sale
+    # transaction or the amount of accrued market discount. When the
+    # sale of a debt instrument is a wash sale and has accrued market
+    # discount, code "W" will be in box 1f and the amount of the wash
+    # sale loss disallowed will be in box 1g. For details on wash
+    # sales and market discount, see Scheduled D (Form 1040)
+    # instructions and Pub. 550.
+    # r[4] contains the content of Box 1g and r[11] contains the contents of Box 1f.
+    print '%s,%g,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s' % (r[8], count, r[2], r[9], r[3], r[4], r[5], r[6], r[7], r[10], r[11], r[1], r[0])

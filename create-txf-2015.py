@@ -28,6 +28,10 @@ import sys
 import csv
 
 box_dict = {'A': 321, 'B': 711, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
+# Only two taxrefs for wash sales are documented in Section IV.  One
+# of those is used in Example 2C.  Example 2G for a long-term wash
+# sale uses taxref 713.
+wash_box_dict = {'A': 682, 'B': 718, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 
 print 'V042'
 print 'Aself'
@@ -42,8 +46,11 @@ with open(sys.argv[1], 'r') as csvfile:
         disposed = row[3]
         proceeds = row[4]
         base = row[5]
+        adj = row[6]
         gain = row[7]
-        box = row[9]
+        adj_code = row[9]
+        box = row[10]
+        taxref = wash_box_dict[box] if adj_code == 'W' else box_dict[box]
         prefix = ' '
         if '/' in symbol:
             prefix = ' opt '
@@ -53,17 +60,19 @@ with open(sys.argv[1], 'r') as csvfile:
             prefix = ' short' + prefix
             count = count[1:]
             # https://www.irs.gov/pub/irs-pdf/i8949.pdf
-            # Column (b)—Date Acquired
+            # Column (b)-Date Acquired
             # For a short sale, enter the date you acquired the property
             # delivered to the broker or lender to close the short sale.
             acquired = disposed
         descr = count + prefix + symbol
         print 'TD'
-        print 'N' + str(box_dict[box])
+        print 'N' + str(taxref)
         print 'P ' + descr
         print 'D ' + acquired
         print 'D ' + disposed
         print '$' + base
         print '$' + proceeds
+        if adj != '--' and adj != '0.00':
+            print '$' + adj
         print '^'
 

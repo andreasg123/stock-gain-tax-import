@@ -64,6 +64,8 @@ for r in records:
     count = float(r[3])
     if code.lower().find('short') >= 0:
         count = -count
+    # These codes do not get used elsewhere. I just set them to make the
+    # Ameritrade output more similar to the Schwab output.
     if code == 'Short sale closed- option':
         code = 'BC'
     elif code == 'Option expiration short position' or code == 'Option expiration':
@@ -71,4 +73,13 @@ for r in records:
     adj = r[7]
     if adj == '...':
         adj = '--'
-    print '%s,%g,%s,%s,%s,%s,%s,%s,,%s,%s,%s' % (r[1], count, r[5], r[2], r[4], r[6], adj, r[8], r[10], code, r[0])
+    # From the instructions of TD Ameritrade Form 1099-B:
+    # Column 1f. Shows W for wash sale, C for collectibles, or D for market discount.
+    # Column 1g. Shows the amount of nondeductible loss in a wash sale
+    # transaction or the amount of accrued market discount. When the sale of a
+    # debt instrument is a wash sale and has accrued market discount, code W
+    # will be in column 1f and the amount of the wash sale loss disallowed will
+    # be in column 1g. For details on wash sales and market discount, see
+    # Schedule D (Form 1040) instructions and Pub. 550.
+    # One of Column 1f and 1g is in "adj" but I don't know which one (no example).
+    print '%s,%g,%s,%s,%s,%s,%s,%s,,,%s,%s,%s' % (r[1], count, r[5], r[2], r[4], r[6], adj, r[8], r[10], code, r[0])

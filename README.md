@@ -57,3 +57,8 @@ transactions, for example, if the brokerage company did not report the cost
 
 If you don't like what you see, you can remove the imported data via
 "File > Remove Imported Data".
+
+## Wash sales
+
+Wash sales are not tested because I don't have any examples for it.  I tried to
+figure out the correct taxrefs for TXF but the parsing isn't tested.
