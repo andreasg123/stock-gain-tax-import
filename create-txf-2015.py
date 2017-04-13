@@ -26,6 +26,7 @@
 
 import sys
 import csv
+import datetime
 
 box_dict = {'A': 321, 'B': 711, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 # Only two taxrefs for wash sales are documented in Section IV.  One
@@ -35,7 +36,7 @@ wash_box_dict = {'A': 682, 'B': 718, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 
 print 'V042'
 print 'Aself'
-print 'D 04/01/2016'
+print 'D', datetime.date.today().strftime('%m/%d/%y')
 print '^'
 
 with open(sys.argv[1], 'r') as csvfile:
@@ -72,6 +73,10 @@ with open(sys.argv[1], 'r') as csvfile:
         print 'D ' + disposed
         print '$' + base
         print '$' + proceeds
+        # TurboTax 2016 ignores the sign of the adjustment and always puts "W"
+        # in Box (f) if an adjustment is present.  For other types of
+        # adjustments, e.g., "B", one has to override the values in Form 8949
+        # in Forms View, including the new value in Box (h).
         if adj != '--' and adj != '0.00':
             print '$' + adj
         print '^'
