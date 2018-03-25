@@ -46,7 +46,12 @@ with open(sys.argv[1], 'r') as csvfile:
         acquired = row[2]
         disposed = row[3]
         proceeds = row[4]
-        base = row[5]
+        try:
+            # TXF042.jsp, example 2B; may be reported as "Missing" in 1099-B.
+            float(row[5])
+            base = row[5]
+        except ValueError:
+            base = ''
         adj = row[6]
         gain = row[7]
         adj_code = row[9]

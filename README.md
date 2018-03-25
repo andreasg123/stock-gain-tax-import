@@ -10,6 +10,10 @@ from Form 1099-B.  Unfortunately, neither Charles Schwab nor TD
 Ameritrade provide a TXF file.  They only provide a PDF file
 containing Form 1099-B.
 
+## Update for 2017
+
+The format of the PDF files again changed slightly from the previous year.
+
 ## Update for 2016
 
 Charles Schwab now provides a CSV file but it doesn't refer to stocks by
