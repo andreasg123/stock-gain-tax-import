@@ -34,10 +34,10 @@ box_dict = {'A': 321, 'B': 711, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 # sale uses taxref 713.
 wash_box_dict = {'A': 682, 'B': 718, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 
-print 'V042'
-print 'Aself'
-print 'D', datetime.date.today().strftime('%m/%d/%y')
-print '^'
+print('V042')
+print('Aself')
+print('D', datetime.date.today().strftime('%m/%d/%y'))
+print('^')
 
 with open(sys.argv[1], 'r') as csvfile:
     for row in csv.reader(csvfile):
@@ -71,18 +71,18 @@ with open(sys.argv[1], 'r') as csvfile:
             # delivered to the broker or lender to close the short sale.
             acquired = disposed
         descr = count + prefix + symbol
-        print 'TD'
-        print 'N' + str(taxref)
-        print 'P ' + descr
-        print 'D ' + acquired
-        print 'D ' + disposed
-        print '$' + base
-        print '$' + proceeds
+        print('TD')
+        print('N' + str(taxref))
+        print('P ' + descr)
+        print('D ' + acquired.replace('VARIOUS', 'Various'))
+        print('D ' + disposed)
+        print('$' + base)
+        print('$' + proceeds)
         # TurboTax 2016 ignores the sign of the adjustment and always puts "W"
         # in Box (f) if an adjustment is present.  For other types of
         # adjustments, e.g., "B", one has to override the values in Form 8949
         # in Forms View, including the new value in Box (h).
         if adj != '--' and adj != '0.00':
-            print '$' + adj
-        print '^'
+            print('$' + adj)
+        print('^')
 
