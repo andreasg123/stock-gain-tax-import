@@ -52,11 +52,14 @@ with open(sys.argv[1], 'r') as csvfile:
             base = row[5]
         except ValueError:
             base = ''
-        adj = row[6]
+        accrued_market_discount = row[6]
         gain = row[7]
-        adj_code = row[9]
+        wash_sale_loss = row[9]
         box = row[10]
-        taxref = wash_box_dict[box] if adj_code == 'W' else box_dict[box]
+        taxref = (wash_box_dict[box]
+                  if wash_sale_loss and wash_sale_loss != '--' and
+                  wash_sale_loss != '0.00'
+                  else box_dict[box])
         prefix = ' '
         if '/' in symbol:
             prefix = ' opt '
@@ -78,11 +81,12 @@ with open(sys.argv[1], 'r') as csvfile:
         print('D ' + disposed)
         print('$' + base)
         print('$' + proceeds)
-        # TurboTax 2016 ignores the sign of the adjustment and always puts "W"
+        # TurboTax ignores the sign of the adjustment and always puts "W"
         # in Box (f) if an adjustment is present.  For other types of
         # adjustments, e.g., "B", one has to override the values in Form 8949
         # in Forms View, including the new value in Box (h).
-        if adj != '--' and adj != '0.00':
-            print('$' + adj)
+        if (wash_sale_loss and wash_sale_loss != '--' and
+            wash_sale_loss != '0.00'):
+            print('$' + wash_sale_loss)
         print('^')
 

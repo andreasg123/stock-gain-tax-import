@@ -59,7 +59,7 @@ Box E from short-term to long-term.
 
 The python script converts CSV to TXF:
 
-    python3 create-txf-2015.py 1099-b.csv > 1099-b.txf
+    python3 create-txf-2018.py 1099-b.csv > 1099-b.txf
 
 If you have multiple accounts, you may combine the .csv files by sorting them
 before creating the .txf file from the combined file.
@@ -87,7 +87,8 @@ transactions, for example, if the brokerage company did not report the cost
 If you don't like what you see, you can remove the imported data via
 "File > Remove Imported Data".  If you overrode any values, you should undo
 that before removing the imported data because the override will affect the
-next import.
+next import.  Also, overrides remain by position in the form so that it is best
+to undo all overrides before removing any of several imported TXF files.
 
 ## Wash sales
 
@@ -97,7 +98,7 @@ when attempting a different adjustment, the result was correct for a wash sale
 
 ## Other adjustments
 
-TurboTax 2016 ignores the sign of the adjustment in the TXF file and always
+TurboTax ignores the sign of the adjustment in the TXF file and always
 puts "W" in Box (f) if an adjustment is present.  For other types of
 adjustments, e.g., "B", one has to override the values in Form 8949 in Forms
 View, including the new value in Box (h).
