@@ -5,7 +5,7 @@ Brokerage companies report information on stock and option trades on
 filing.  Copying data by hand for dozens of stock or option trades is
 tedious and error-prone.  TurboTax (and maybe other tax preparation
 software) supports the [TXF
-format](https://www.thebalance.com/what-is-txf-1293734) for [importing 
+format](https://web.archive.org/web/20121103033816/https://turbotax.intuit.com/txf/TXF042.jsp) for [importing 
 data](https://ttlc.intuit.com/questions/1899278-how-do-i-import-from-the-txf-file)
 from Form 1099-B.  Unfortunately, neither Charles Schwab nor TD
 Ameritrade provide a TXF file.  They only provide a PDF file
